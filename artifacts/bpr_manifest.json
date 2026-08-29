@@ -1,0 +1,10 @@
+{
+  "n_users": 38921,
+  "n_items": 44923,
+  "dimension": 64,
+  "learning_rate": 0.05,
+  "regularization": 0.0001,
+  "epochs": 20,
+  "seed": 20263720,
+  "history": "all rows of leave-last-two split; simulation begins after full observed history"
+}

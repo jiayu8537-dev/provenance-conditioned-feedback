@@ -1,0 +1,13 @@
+{
+  "n_users": 38921,
+  "n_items": 44923,
+  "dimension": 32,
+  "layers": 2,
+  "learning_rate": 0.01,
+  "regularization": 0.0001,
+  "optimization_passes": 8,
+  "sample_size": 80000,
+  "seed": 20264720,
+  "history": "all rows of leave-last-two split",
+  "implementation": "LightGCN with full-graph normalized propagation"
+}
