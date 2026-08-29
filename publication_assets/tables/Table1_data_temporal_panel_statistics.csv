@@ -1,0 +1,16 @@
+panel,sample_or_metric,threshold_or_definition,interactions_or_value,users,items,auxiliary
+A. Dataset and k-core construction,Raw PixelRec50K,Unfiltered,989494,50000,82865,0.9997611792674832
+A. Dataset and k-core construction,wide_5u3i,5 user / 3 item,956817,49993,59781,0.9996798477867094
+A. Dataset and k-core construction,main_10u5i,10 user / 5 item,816905,38921,44923,0.9995327828101145
+A. Dataset and k-core construction,strict_15u5i,15 user / 5 item,567403,20132,37576,0.9992499431895117
+B. Main-sample temporal split,train,Within-user leave-last-two,739063,38921,44749,1
+B. Main-sample temporal split,validation,Within-user leave-last-two,38921,38921,18108,0.9913671282855014
+B. Main-sample temporal split,test,Within-user leave-last-two,38921,38921,15823,0.9662906914005293
+C. Confirmatory simulation panel,Panels,Independent activity-stratified panels,5,,,
+C. Confirmatory simulation panel,Users per panel,30 from each activity quintile,150,,,
+C. Confirmatory simulation panel,Attribution assignments,Qualified balanced seeds,10,,,
+C. Confirmatory simulation panel,Response streams,Seeds crossed within panel × assignment,10,,,
+C. Confirmatory simulation panel,Paired units per scenario,5 × 10 × 10,500,,,
+C. Confirmatory simulation panel,Recommendation rounds,Controlled dynamic horizon,6,,,
+C. Confirmatory simulation panel,Candidate pool,"Main specification, M",240,,,
+C. Confirmatory simulation panel,Displayed list,Top-K,20,,,

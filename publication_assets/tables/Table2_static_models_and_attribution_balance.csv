@@ -1,0 +1,9 @@
+panel,entry,statistic_1,statistic_2,statistic_3,statistic_4,n_or_range
+A. Static recommendation performance,MostPop,0.0013826477704804,0.0004574154153671,0.0005342474901498,0.9995534939723768,38921
+A. Static recommendation performance,BPR-MF,0.0091733361695338,0.0034543481759225,0.1334283106649155,0.9817697050152688,38921
+A. Static recommendation performance,LightGCN,0.008003403440665798,0.0031922617509746202,0.3207043162745142,0.9587892274675971,38921
+B. Attribution allocation diagnostics,Qualified assignment seeds,10,,,,10
+B. Attribution allocation diagnostics,Items per attribution group,14974,14975,,,"14,974–14,975"
+B. Attribution allocation diagnostics,Maximum absolute standardized mean difference,0.021964095048488598,0.0118670871603231,0.0249099651088729,,0.0118670871603231–0.0249099651088729
+B. Attribution allocation diagnostics,Maximum theme total-variation distance,0.03437568245727205,0.0316548684386269,0.0394291808639705,,0.0316548684386269–0.0394291808639705
+B. Attribution allocation diagnostics,Maximum initial model-exposure deviation,0.0903237354981235,0.0658850063291633,0.0965268466821942,,0.0658850063291633–0.0965268466821942
