@@ -1,0 +1,11 @@
+{
+  "status": "complete",
+  "rows": 1200,
+  "seconds": 164.7243368625641,
+  "panel": 1,
+  "candidate_size": 1000,
+  "online_steps": 3,
+  "assignment_count": 5,
+  "response_count": 5,
+  "oracle_c": 1.0
+}

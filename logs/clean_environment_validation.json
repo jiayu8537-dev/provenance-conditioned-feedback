@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "validation_date": "2026-08-16",
+  "python": "3.12.13",
+  "environment": "new virtual environment installed only from requirements.txt",
+  "unit_and_integration_tests": {
+    "passed": 23,
+    "failed": 0
+  },
+  "archive_audit": {
+    "status": "passed",
+    "checks_passed_before_final_manifest": 1444
+  },
+  "aggregation_audit": {
+    "status": "passed",
+    "tables_recomputed": 24,
+    "point_columns_checked_exactly": 125,
+    "max_interval_endpoint_difference": 0.0016054310417979029,
+    "allowed_interval_endpoint_difference": 0.002,
+    "disposable_copy_removed": true
+  },
+  "data_preparation_audit": "passed; see data_preparation_validation.json"
+}

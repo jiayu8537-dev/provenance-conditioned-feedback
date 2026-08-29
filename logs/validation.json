@@ -1,0 +1,36 @@
+{
+  "main_rows": 90000,
+  "panels": 5,
+  "assignments": 10,
+  "responses": 10,
+  "scenarios": [
+    "ai_appreciation",
+    "heterogeneous_response",
+    "mild_aversion",
+    "moderate_asymmetric",
+    "strong_premium_penalty",
+    "zero"
+  ],
+  "interventions": [
+    "combined",
+    "none",
+    "oracle_feedback_correction",
+    "quota_reranking"
+  ],
+  "duplicate_branch_rows": 0,
+  "all_units_have_frozen_and_closed": true,
+  "nonfinite_metric_cells": 0,
+  "frozen_updates_zero": true,
+  "closed_updates_equal_3x_accepted": true,
+  "main_shards": 5,
+  "sensitivity_shards": 18,
+  "tables": [
+    "Table3_zero_effect_equivalence.csv",
+    "Table4_BPR_algorithmic_amplification.csv",
+    "Table5_intervention_tradeoffs.csv",
+    "candidate_pool_sensitivity.csv",
+    "online_update_sensitivity.csv",
+    "oracle_misspecification_sensitivity.csv"
+  ],
+  "failed_configurations": []
+}

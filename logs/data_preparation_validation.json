@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "official_inputs": {
+    "interaction.csv": {
+      "sha256": "638b53ec100f760cb9bd540c361f6d6e3617c81b1c054ced63fffa41da909e4d"
+    },
+    "item_info.csv": {
+      "sha256": "a073c2c65900f215a8137929b27dc57cf6f4f8fa11453a5c74fa8ff3a730a04e"
+    }
+  },
+  "dimensions": {
+    "wide": {
+      "interactions": 956817,
+      "users": 49993,
+      "items": 59781
+    },
+    "main": {
+      "interactions": 816905,
+      "users": 38921,
+      "items": 44923
+    },
+    "strict": {
+      "interactions": 567403,
+      "users": 20132,
+      "items": 37576
+    }
+  },
+  "checks": {
+    "main_split_uncompressed_sha256": "4445f6421e99bdc1c6d0dba029bca5de73cc9d6ace11818d394e376e0ed1fbf5",
+    "main_user_index_sha256": "ccb358622fc9dbe3b8afbb4457bac23fb9589b75dfffcc58214f57309c99a00e",
+    "main_item_index_sha256": "8e0dd7be7f1f1270f23f04f2b5ef51a94ab68e217adba85b7be219860ea542d0",
+    "main_row_index_uncompressed_sha256": "4f3d5ddcf6935e03de1f75771fa1dcba9093844078de8b67d9093dbf48efda9a",
+    "strict_user_index_sha256": "2ae230534fa35cd88b3bca92688479e3d3b251cf197c6e383efbc8821c44fa32",
+    "strict_item_index_sha256": "ac56a041a7e2092636a0c776db77a72e7899acfdd2d0816160f0271589910310",
+    "strict_row_index_uncompressed_sha256": "2f8d825a484ecee026321681de8d611d9068a1ec3ef74a86f7ba5f2d33fb915e",
+    "catalog_item_id_vector_sha256": "6468dd1e8e6d88956d6044650927437c481827d97f928ce2a89c9941b64bab5e",
+    "model_aware_block_vector_sha256": "5789c72f5b535d6d6324a498bee266082550132f694bc8716d77b79b4551c4fd",
+    "selected_label_vector_sha256": "a7a1efe2e783a46d4404572940ee38717da202e0368f8358f801f71a29831d14"
+  }
+}

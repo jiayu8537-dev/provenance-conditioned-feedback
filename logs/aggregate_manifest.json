@@ -1,0 +1,12 @@
+{
+  "status": "complete",
+  "main_rows": 90000,
+  "main_shards": [
+    "raw/main/panel_0.csv.gz",
+    "raw/main/panel_1.csv.gz",
+    "raw/main/panel_2.csv.gz",
+    "raw/main/panel_3.csv.gz",
+    "raw/main/panel_4.csv.gz"
+  ],
+  "supersedes": "all previous dynamic BPR point estimates"
+}

@@ -1,0 +1,8 @@
+{
+  "python": "3.12.13 (main, Mar  3 2026, 15:03:16) [Clang 21.1.4]",
+  "platform": "macOS-15.7.7-x86_64-i386-64bit",
+  "machine": "x86_64",
+  "numpy": "2.2.6",
+  "pandas": "2.2.3",
+  "scope": "archived main-output summary environment; use requirements.txt for the supported end-to-end rerun"
+}
