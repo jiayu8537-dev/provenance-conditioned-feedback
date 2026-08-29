@@ -1,0 +1,21 @@
+{
+  "status": "complete",
+  "seconds": 51.22033619880676,
+  "interactions": 567403,
+  "users": 20132,
+  "items": 37576,
+  "split_counts": {
+    "test": 20132,
+    "train": 527139,
+    "validation": 20132
+  },
+  "qualified_assignments": 12,
+  "selected_assignment_seeds": [
+    20331723,
+    20331756,
+    20331837,
+    20331935,
+    20332116
+  ],
+  "block_definition": "120 strict-core BPR/covariate clusters crossed with strict-core popularity quintiles"
+}

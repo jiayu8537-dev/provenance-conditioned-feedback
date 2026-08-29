@@ -1,0 +1,8 @@
+{
+  "status": "complete",
+  "rows": 7200,
+  "targeted_grid": "2 panels x 5 assignments x 5 response seeds",
+  "bootstrap_repetitions": 2000,
+  "strict_core_results_pooled_with_confirmatory": false,
+  "synchronous_comparison": "same recommendation schedule and event-gradient contributions; sequential versus simultaneous parameter application"
+}
