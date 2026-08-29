@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="174mm" height="79.26666666666667mm" viewBox="0 0 1800 820" role="img" aria-labelledby="title desc">
+<title id="title">Feedback pathway from provenance disclosure to future exposure</title>
+<desc id="desc">A six-stage feedback loop shows that provenance affects user choice rather than the BPR scoring function, then enters online learning through accepted interactions and changes future exposure.</desc>
+<metadata>JIIS submission figure; numeric panels use validated publication CSV tables.</metadata>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#222222"/>
+  </marker>
+  <marker id="arrow-blue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#0072B2"/>
+  </marker>
+</defs>
+<style>
+  text { font-family: Arial, Helvetica, "Liberation Sans", sans-serif; fill: #222222; font-size: 31px; font-weight: 400; }
+  .label { font-size: 32px; font-weight: 500; }
+  .small { font-size: 30px; }
+  .tiny { font-size: 29px; fill: #666666; }
+  .panel { font-size: 36px; font-weight: 500; }
+  .axis { stroke: #222222; stroke-width: 3; fill: none; }
+  .grid { stroke: #D9D9D9; stroke-width: 2; fill: none; }
+  .zero { stroke: #666666; stroke-width: 2.5; stroke-dasharray: 8 7; fill: none; }
+  .ci { stroke-width: 4; stroke-linecap: round; fill: none; }
+  .node { fill: #FFFFFF; stroke: #222222; stroke-width: 3; }
+  .node-blue { fill: #EAF4FA; stroke: #0072B2; stroke-width: 3.5; }
+  .node-orange { fill: #FCF1E8; stroke: #D55E00; stroke-width: 3.5; }
+  .node-green { fill: #E9F6F1; stroke: #009E73; stroke-width: 3.5; }
+</style>
+<rect x="0" y="0" width="1800" height="820" fill="#FFFFFF"/>
+<rect x="35" y="255" width="235" height="185" rx="14" class="node-blue"/><text x="152.5" y="292" text-anchor="middle" dominant-baseline="middle" class="label">Current</text>
+<text x="152.5" y="326" text-anchor="middle" dominant-baseline="middle" class="small">ranking score</text>
+<text x="152.5" y="360" text-anchor="middle" dominant-baseline="middle" class="small">provenance</text>
+<text x="152.5" y="394" text-anchor="middle" dominant-baseline="middle" class="small">omitted</text><line x1="280" y1="347.5" x2="303" y2="347.5" stroke="#222222" stroke-width="4" fill="none" marker-end="url(#arrow)"/><rect x="315" y="255" width="235" height="185" rx="14" class="node"/><text x="432.5" y="303" text-anchor="middle" dominant-baseline="middle" class="label">Top-20 display</text>
+<text x="432.5" y="345" text-anchor="middle" dominant-baseline="middle" class="small">rank position</text>
+<text x="432.5" y="387" text-anchor="middle" dominant-baseline="middle" class="small">+ disclosed label</text><line x1="560" y1="347.5" x2="583" y2="347.5" stroke="#222222" stroke-width="4" fill="none" marker-end="url(#arrow)"/><rect x="595" y="255" width="245" height="185" rx="14" class="node-orange"/><text x="717.5" y="292" text-anchor="middle" dominant-baseline="middle" class="label">User choice</text>
+<text x="717.5" y="326" text-anchor="middle" dominant-baseline="middle" class="small">relevance</text>
+<text x="717.5" y="360" text-anchor="middle" dominant-baseline="middle" class="small">+ position</text>
+<text x="717.5" y="394" text-anchor="middle" dominant-baseline="middle" class="small">+ provenance cue</text><line x1="850" y1="347.5" x2="873" y2="347.5" stroke="#222222" stroke-width="4" fill="none" marker-end="url(#arrow)"/><rect x="885" y="255" width="245" height="185" rx="14" class="node-orange"/><text x="1007.5" y="292" text-anchor="middle" dominant-baseline="middle" class="label">Behavioral</text>
+<text x="1007.5" y="326" text-anchor="middle" dominant-baseline="middle" class="small">signal</text>
+<text x="1007.5" y="360" text-anchor="middle" dominant-baseline="middle" class="small">accept an item</text>
+<text x="1007.5" y="394" text-anchor="middle" dominant-baseline="middle" class="small">or no click</text><line x1="1140" y1="347.5" x2="1163" y2="347.5" stroke="#222222" stroke-width="4" fill="none" marker-end="url(#arrow)"/><rect x="1175" y="255" width="245" height="185" rx="14" class="node-green"/><text x="1297.5" y="303" text-anchor="middle" dominant-baseline="middle" class="label">Online update</text>
+<text x="1297.5" y="345" text-anchor="middle" dominant-baseline="middle" class="small">new interaction</text>
+<text x="1297.5" y="387" text-anchor="middle" dominant-baseline="middle" class="small">K steps; no replay</text><line x1="1430" y1="347.5" x2="1453" y2="347.5" stroke="#222222" stroke-width="4" fill="none" marker-end="url(#arrow)"/><rect x="1465" y="255" width="300" height="185" rx="14" class="node-blue"/><text x="1615" y="292" text-anchor="middle" dominant-baseline="middle" class="label">Future ranking</text>
+<text x="1615" y="326" text-anchor="middle" dominant-baseline="middle" class="small">updated preferences</text>
+<text x="1615" y="360" text-anchor="middle" dominant-baseline="middle" class="small">group exposure</text>
+<text x="1615" y="394" text-anchor="middle" dominant-baseline="middle" class="small">at t + 1</text><text x="520" y="78" text-anchor="middle" dominant-baseline="alphabetic" class="label">Simulated provenance attribution</text><text x="520" y="125" text-anchor="middle" dominant-baseline="middle" class="tiny">balanced item-level assignment</text>
+<text x="520" y="155" text-anchor="middle" dominant-baseline="middle" class="tiny">(AI / Human–AI / Human)</text><line x1="520" y1="178" x2="520" y2="243" stroke="#D55E00" stroke-width="4" fill="none" marker-end="url(#arrow)"/><text x="155" y="88" text-anchor="middle" dominant-baseline="alphabetic" class="small">Learned state</text><line x1="140" y1="120" x2="140" y2="243" stroke="#0072B2" stroke-width="4" fill="none" marker-end="url(#arrow-blue)"/><rect x="635" y="535" width="290" height="98" rx="12" class="node"/><text x="780" y="566" text-anchor="middle" dominant-baseline="middle" class="label">No click</text>
+<text x="780" y="599" text-anchor="middle" dominant-baseline="middle" class="tiny">outside utility = 0.5</text><line x1="780" y1="447" x2="780" y2="522" stroke="#666666" stroke-width="3" stroke-dasharray="8 7" marker-end="url(#arrow)"/><rect x="990" y="535" width="300" height="98" rx="12" class="node"/><text x="1140" y="566" text-anchor="middle" dominant-baseline="middle" class="label">No model update</text>
+<text x="1140" y="599" text-anchor="middle" dominant-baseline="middle" class="tiny">state unchanged</text><line x1="925" y1="584" x2="977" y2="584" stroke="#222222" stroke-width="4" fill="none" marker-end="url(#arrow)"/><path d="M 1625 453 C 1625 750, 160 750, 160 453" stroke="#0072B2" stroke-width="4" fill="none" marker-end="url(#arrow-blue)"/><text x="900" y="790" text-anchor="middle" dominant-baseline="alphabetic" class="small" style="fill:#0072B2;font-weight:500">recursive pathway across recommendation rounds (t → t+1)</text>
+</svg>
