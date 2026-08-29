@@ -1,0 +1,24 @@
+component,stream,seed_or_rule,scope,source
+global,base_seed,20260720,all analyses,configs/main.yaml
+static_bpr,initialization_and_sampling,20263720,64-dimensional 20-epoch full-history BPR,configs/bpr.yaml
+static_lightgcn,initialization_and_sampling,20264720,32-dimensional two-layer CPU LightGCN,configs/extension.yaml
+main,user_panel,global_seed+21000+1000*panel_index,panels 0-4,run_all_cpu.py
+main,candidate_pool,global_seed+22000+1000*panel_index+candidate_size,all panel/candidate-size cells,run_all_cpu.py
+main,response_and_negative_stream,global_seed+30000+response_seed,response seeds 0-9 or 0-4,run_all_cpu.py
+main,heterogeneous_response,global_seed+24000+response_seed,heterogeneous response scenario,run_all_cpu.py
+main,assignment_candidates,20271720 through 20272219,500 prescreened assignments,data/protocol/model_aware_assignment_candidates.csv
+main,confirmatory_assignments,"20271722;20271764;20271791;20271819;20271876;20271986;20272058;20272112;20272176;20272212",10 confirmatory assignments,raw/qualified_assignment_metadata_10.csv
+main,reduced_assignments,"20271722;20271764;20271791;20271819;20271876",targeted 2x5x5 analyses,raw/qualified_assignment_metadata_5.csv
+bootstrap,zero_equivalence,20261001,Section 5.1 neutral-drift equivalence,run_all_cpu.py
+bootstrap,main_amplification,20262000+row_index,Fig. 3 and Section 5.2,run_all_cpu.py
+bootstrap,control_amplification,20263000+row_index,Main-manuscript Table 4,run_all_cpu.py
+bootstrap,control_contrasts,20264000+row_index,Main-manuscript Table 4,run_all_cpu.py
+bootstrap,main_sensitivity,20265000+row_index,candidate/update/oracle tables,run_all_cpu.py
+bootstrap,choice_process,20268100/20268200 plus specification and scenario offsets,choice-process AA and CTR,run_choice_process_sensitivity.py
+extension,user_panel,global_seed+21000+1000*panel_index,panels 0-1,run_extension.py
+extension,candidate_pool,global_seed+22000+1000*panel_index+candidate_size,LightGCN and horizons,run_extension.py
+extension,response_negative_replay,global_seed+30000+response_seed,response/negative/replay arrays,run_extension.py
+bootstrap,long_horizon,20270100-20271499,horizon trajectories endpoints and regime differences,run_extension.py
+robustness,strict_projection_and_clustering,global_seed+61000,strict-core model-aware blocks,run_robustness.py
+robustness,strict_assignment_candidates,global_seed+71000 through +71499,500 strict-core candidates,run_robustness.py
+bootstrap,robustness,20278100-20278499,strict/synchronous summaries,run_robustness.py

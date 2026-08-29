@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this reproducibility package, please cite the accompanying manuscript."
+title: "Reproducibility package for Provenance-Conditioned Feedback in Online Recommender Systems: A Semi-Synthetic Study of Exposure Dynamics"
+type: software
+authors:
+  - family-names: Jia
+    given-names: Yu
+  - family-names: Zhang
+    given-names: Shaojie
+version: 1.0.0
+date-released: 2026-08-29
