@@ -1,0 +1,13 @@
+core,update_regime,scenario,accepted_interactions_mean,event_gradient_evaluations_mean,parameter_update_operations_mean,event_gradient_evaluations_min,event_gradient_evaluations_max,parameter_update_operations_min,parameter_update_operations_max
+confirmatory_10u5i,event_online,ai_appreciation,881.1,2643.3,2643.3,2628,2673,2628,2673
+confirmatory_10u5i,event_online,moderate_asymmetric,878.94,2636.82,2636.82,2622,2667,2622,2667
+confirmatory_10u5i,event_online,strong_premium_penalty,879.46,2638.38,2638.38,2625,2667,2625,2667
+confirmatory_10u5i,event_online,zero,879.8,2639.4,2639.4,2625,2670,2625,2670
+confirmatory_10u5i,round_synchronous,ai_appreciation,881.04,2643.12,18.0,2628,2673,18,18
+confirmatory_10u5i,round_synchronous,moderate_asymmetric,878.98,2636.94,18.0,2622,2667,18,18
+confirmatory_10u5i,round_synchronous,strong_premium_penalty,879.44,2638.32,18.0,2625,2667,18,18
+confirmatory_10u5i,round_synchronous,zero,879.7,2639.1,18.0,2625,2670,18,18
+strict_15u5i,event_online,ai_appreciation,881.66,2644.98,2644.98,2634,2676,2634,2676
+strict_15u5i,event_online,moderate_asymmetric,880.52,2641.56,2641.56,2625,2670,2625,2670
+strict_15u5i,event_online,strong_premium_penalty,880.96,2642.88,2642.88,2628,2676,2628,2676
+strict_15u5i,event_online,zero,881.1,2643.3,2643.3,2634,2670,2634,2670
