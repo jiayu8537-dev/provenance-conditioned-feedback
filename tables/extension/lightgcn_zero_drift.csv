@@ -1,0 +1,2 @@
+estimate,ci_low,ci_high,equivalence_margin,equivalent_by_95_percent_interval,n
+-0.014935531978235104,-0.048101464325774196,0.016605756220262734,0.02,False,50
