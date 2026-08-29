@@ -1,0 +1,6 @@
+specification,moderate_positive,strong_exceeds_moderate,ai_appreciation_negative
+baseline,True,True,True
+outside_0p0,True,True,True
+outside_1p0,True,True,True
+position_0p4,True,True,True
+position_1p2,True,True,True
