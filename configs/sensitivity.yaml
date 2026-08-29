@@ -1,0 +1,9 @@
+panel_indices: [0, 1]
+assignment_count: 5
+response_seed_count: 5
+bootstrap_repetitions: 2000
+scenarios: [zero, moderate_asymmetric, strong_premium_penalty, ai_appreciation]
+candidate_pool_sizes: [240, 500, 1000]
+online_update_counts: [1, 3, 10]
+oracle_misspecification_factors: [0.5, 1.0, 1.5]
+note: "Reduced grid fixed before corrected outcomes: 2 panels x 5 assignments x 5 responses."

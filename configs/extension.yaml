@@ -1,0 +1,40 @@
+lightgcn:
+  dimension: 32
+  layers: 2
+  static_learning_rate: 0.01
+  static_regularization: 0.0001
+  static_optimization_passes: 8
+  static_sample_size: 80000
+  static_seed: 20264720
+  dynamic_learning_rate: 0.005
+  dynamic_regularization: 0.0001
+  dynamic_steps: 3
+  panel_count: 2
+  assignment_count: 5
+  response_seed_count: 5
+  rounds: 6
+  scenarios:
+    zero: [0.00, 0.00, 0.00]
+    moderate_asymmetric: [-0.15, -0.05, 0.05]
+    strong_premium_penalty: [-0.25, 0.00, 0.15]
+    ai_appreciation: [0.10, 0.05, 0.00]
+  interventions:
+    zero: [none, combined]
+    moderate_asymmetric: [none, combined]
+    strong_premium_penalty: [none, combined]
+    ai_appreciation: [none]
+long_horizon:
+  panel_count: 2
+  assignment_count: 5
+  response_seed_count: 5
+  rounds: [6, 12, 24]
+  scenarios:
+    zero: [0.00, 0.00, 0.00]
+    moderate_asymmetric: [-0.15, -0.05, 0.05]
+    strong_premium_penalty: [-0.25, 0.00, 0.15]
+    ai_appreciation: [0.10, 0.05, 0.00]
+update_regime:
+  name: fixed_budget_history_replay
+  clicked_steps: 2
+  replay_steps: 1
+  total_steps_per_event: 3

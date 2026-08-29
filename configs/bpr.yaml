@@ -1,0 +1,6 @@
+dimension: 64
+learning_rate: 0.05
+regularization: 0.0001
+epochs: 20
+seed: 20263720
+initialization_history: complete_observed_leave_last_two_split

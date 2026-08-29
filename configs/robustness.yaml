@@ -1,0 +1,28 @@
+global_seed: 20260720
+panel_count: 2
+panel_size: 150
+assignment_count: 5
+candidate_assignment_count: 500
+response_seed_count: 5
+rounds: 6
+top_k: 20
+candidate_size: 240
+top_retrieval: 150
+online_steps: 3
+online_learning_rate: 0.01
+online_regularization: 0.0001
+outside_utility: 0.5
+position_scale: 0.8
+minimum_score_sd: 1.0e-6
+bootstrap_repetitions: 2000
+equivalence_margin: 0.02
+strict_core:
+  minimum_user_interactions: 15
+  minimum_item_interactions: 5
+  latent_clusters: 120
+  random_projection_dimensions: 16
+scenarios:
+  zero: [0.00, 0.00, 0.00]
+  moderate_asymmetric: [-0.15, -0.05, 0.05]
+  strong_premium_penalty: [-0.25, 0.00, 0.15]
+  ai_appreciation: [0.10, 0.05, 0.00]
