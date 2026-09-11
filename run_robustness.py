@@ -27,7 +27,7 @@ from src.simulation import SimulationConfig, simulate_paired
 
 
 ROOT = Path(__file__).resolve().parent
-DATA_ROOT = Path(os.environ.get("JIIS_DATA_ROOT", ROOT / "data" / "derived"))
+DATA_ROOT = Path(os.environ.get("JDSA_DATA_ROOT", ROOT / "data" / "derived"))
 MAIN_SPLIT = DATA_ROOT / "main_10u5i_leave_last_two_split.csv.gz"
 STRICT_USERS = DATA_ROOT / "strict_15u5i_user_index.csv"
 STRICT_ITEMS = DATA_ROOT / "strict_15u5i_item_index.csv"

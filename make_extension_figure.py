@@ -91,7 +91,7 @@ def main() -> None:
     ]
     x = np.arange(len(core))
     for offset, intervention, marker, label in [
-        (-0.10, "none", "o", "No intervention"),
+        (-0.10, "none", "o", "Unmodified updating"),
         (0.10, "combined", "s", "Combined intervention"),
     ]:
         for index, scenario in enumerate(core):
@@ -116,7 +116,7 @@ def main() -> None:
             )
     ax.axhline(0, color="#374151", linewidth=0.75, linestyle="--")
     ax.set_xticks(x, ["Moderate", "Strong", "AI appreciation"], rotation=18)
-    ax.set_ylabel("Algorithmic amplification, AA")
+    ax.set_ylabel("Learning-mediated exposure contrast, LMC")
     ax.set_title("(a) Dynamic LightGCN at round 6", loc="left")
     ax.legend(frameon=False, loc="upper left")
     ax.grid(axis="y", color="#E5E7EB", linewidth=0.55)
@@ -175,7 +175,7 @@ def main() -> None:
     ax.axhline(0, color="#374151", linewidth=0.75, linestyle="--")
     ax.set_xticks([6, 12, 24])
     ax.set_xlabel("Endpoint round")
-    ax.set_ylabel("Replay − event-online AA")
+    ax.set_ylabel("Replay − event-online LMC")
     ax.set_title("(c) Fixed-budget history replay", loc="left")
     ax.grid(axis="y", color="#E5E7EB", linewidth=0.55)
     ax.legend(frameon=False, loc="best")

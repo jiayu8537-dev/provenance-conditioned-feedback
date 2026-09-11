@@ -51,6 +51,6 @@ control oversubscription. The analysis code caps PyTorch CPU threads at eight.
 
 - Archive audit: tests, aggregate-only regeneration, and package verification;
   no PixelRec data are required.
-- Full rerun: reconstruct licensed inputs, set `JIIS_FORCE_RETRAIN=1` if static
+- Full rerun: reconstruct licensed inputs, set `JDSA_FORCE_RETRAIN=1` if static
   initializations should be refitted instead of loading the delivered fitted
   artifacts, and run `scripts/run_pipeline.py full`.

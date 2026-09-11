@@ -29,7 +29,7 @@ from src.data_loading import (
 )
 from src.simulation import SimulationConfig, simulate_paired
 
-DATA_ROOT = Path(os.environ.get("JIIS_DATA_ROOT", ROOT / "data" / "derived"))
+DATA_ROOT = Path(os.environ.get("JDSA_DATA_ROOT", ROOT / "data" / "derived"))
 SPLIT = DATA_ROOT / "main_10u5i_leave_last_two_split.csv.gz"
 ASSIGNMENT = DATA_ROOT / "model_aware_provenance_assignment_v2.csv"
 ASSIGNMENT_CANDIDATES = (
