@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reconstruct the licensed PixelRec-derived inputs used by the JIIS study.
+"""Reconstruct the licensed PixelRec-derived inputs used by the JDSA study.
 
 The official PixelRec files are intentionally not redistributed.  This script
 recreates the k-cores, leave-last-two split, indices, and model-aware block file
