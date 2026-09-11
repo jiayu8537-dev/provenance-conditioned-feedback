@@ -198,7 +198,7 @@ def load_or_train_lightgcn(
         "history": "all rows of leave-last-two split",
         "implementation": "LightGCN with full-graph normalized propagation",
     }
-    force_retrain = os.environ.get("JIIS_FORCE_RETRAIN", "0") == "1"
+    force_retrain = os.environ.get("JDSA_FORCE_RETRAIN", "0") == "1"
     if not force_retrain and artifact_path.exists() and manifest_path.exists():
         current = json.loads(manifest_path.read_text(encoding="utf-8"))
         if current == expected:
