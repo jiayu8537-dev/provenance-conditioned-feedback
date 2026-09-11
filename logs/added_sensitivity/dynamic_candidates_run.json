@@ -1,0 +1,15 @@
+{
+  "status": "complete",
+  "rows": 2400,
+  "seconds": 647.6962339878082,
+  "panels": 2,
+  "assignments": 5,
+  "response_seeds": 5,
+  "scenarios": [
+    "zero",
+    "moderate_asymmetric",
+    "strong_premium_penalty",
+    "ai_appreciation"
+  ],
+  "candidate_mode": "refresh_from_round_2"
+}

@@ -1,0 +1,19 @@
+{
+  "status": "complete",
+  "rows": 7200,
+  "seconds": 332.3735568523407,
+  "panels": 2,
+  "assignments": 5,
+  "response_seeds": 5,
+  "scenarios": [
+    "zero",
+    "moderate_asymmetric",
+    "strong_premium_penalty",
+    "ai_appreciation"
+  ],
+  "targets": [
+    0.1,
+    0.2,
+    0.4
+  ]
+}

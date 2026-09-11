@@ -1,0 +1,10 @@
+Added-sensitivity archive validation
+Date: 2026-09-10
+Status: passed
+
+- Archived round-level outputs were re-aggregated with
+  `python run_feedback_candidate_sensitivity.py summarize`.
+- Two deterministic assertions in `tests/test_added_sensitivities.py` passed
+  when invoked directly in the bundled Python 3.12 runtime.
+- Final package-level verification passed 1,712 checks with no failures after
+  the checksum manifest was rebuilt.
