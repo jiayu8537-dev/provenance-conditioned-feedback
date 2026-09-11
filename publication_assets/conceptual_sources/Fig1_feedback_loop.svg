@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="174mm" height="79.26666666666667mm" viewBox="0 0 1800 820" role="img" aria-labelledby="title desc">
 <title id="title">Feedback pathway from provenance disclosure to future exposure</title>
 <desc id="desc">A six-stage feedback loop shows that provenance affects user choice rather than the BPR scoring function, then enters online learning through accepted interactions and changes future exposure.</desc>
-<metadata>JIIS submission figure; numeric panels use validated publication CSV tables.</metadata>
+<metadata>JDSA submission figure; numeric panels use validated publication CSV tables.</metadata>
 <defs>
   <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
     <path d="M 0 0 L 10 5 L 0 10 z" fill="#222222"/>
