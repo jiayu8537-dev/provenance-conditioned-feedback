@@ -35,7 +35,7 @@ The expected core dimensions are:
 
 `data/derived/` is deliberately empty in the distributed package. Generated
 files stay under the control of the person who obtained the source dataset.
-Use `JIIS_DATA_ROOT=/another/path` to point all analysis entry points to a
+Use `JDSA_DATA_ROOT=/another/path` to point all analysis entry points to a
 different generated-input directory.
 
 ## Semantic locks
@@ -45,4 +45,3 @@ therefore validates uncompressed CSV bytes for compressed indexes and the main
 split, and validates ordered item/block/label vectors for the reconstructed
 assignment. The exact expected values are embedded in the script and recorded
 in `logs/data_preparation_validation.json`.
-

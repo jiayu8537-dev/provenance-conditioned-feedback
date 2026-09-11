@@ -34,9 +34,9 @@ Core outcome fields:
 ## Summary outputs (`tables/`)
 
 `estimate`, `ci_low`, and `ci_high` report the hierarchical crossed-bootstrap
-mean and 95% interval unless the filename or column states otherwise. `AA` is
+mean and 95% interval unless the filename or column states otherwise. The legacy code field `AA` is
 the paired closed-minus-frozen change in the signed exposure contrast;
-`relative_ratio_percent` equals `100 * (exp(AA) - 1)`. `n` or
+the manuscript's LMC. `relative_ratio_percent` equals `100 * (exp(AA) - 1)`. `n` or
 `simulation_cells` counts crossed design cells, not displayed events.
 
 Empty cells in the no-control rows of the legacy-named Table 5 source file,

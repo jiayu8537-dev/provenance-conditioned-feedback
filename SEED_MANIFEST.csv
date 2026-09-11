@@ -14,7 +14,7 @@ bootstrap,main_amplification,20262000+row_index,Fig. 3 and Section 5.2,run_all_c
 bootstrap,control_amplification,20263000+row_index,Main-manuscript Table 4,run_all_cpu.py
 bootstrap,control_contrasts,20264000+row_index,Main-manuscript Table 4,run_all_cpu.py
 bootstrap,main_sensitivity,20265000+row_index,candidate/update/oracle tables,run_all_cpu.py
-bootstrap,choice_process,20268100/20268200 plus specification and scenario offsets,choice-process AA and CTR,run_choice_process_sensitivity.py
+bootstrap,choice_process,20268100/20268200 plus specification and scenario offsets,choice-process LMC and acceptance rate,run_choice_process_sensitivity.py
 extension,user_panel,global_seed+21000+1000*panel_index,panels 0-1,run_extension.py
 extension,candidate_pool,global_seed+22000+1000*panel_index+candidate_size,LightGCN and horizons,run_extension.py
 extension,response_negative_replay,global_seed+30000+response_seed,response/negative/replay arrays,run_extension.py
@@ -22,3 +22,9 @@ bootstrap,long_horizon,20270100-20271499,horizon trajectories endpoints and regi
 robustness,strict_projection_and_clustering,global_seed+61000,strict-core model-aware blocks,run_robustness.py
 robustness,strict_assignment_candidates,global_seed+71000 through +71499,500 strict-core candidates,run_robustness.py
 bootstrap,robustness,20278100-20278499,strict/synchronous summaries,run_robustness.py
+added_sensitivity,calibration_panel,global_seed+91000,independent 500-user activity-stratified calibration panel,run_feedback_candidate_sensitivity.py
+added_sensitivity,calibration_candidate_pool,global_seed+92000,initial zero-response calibration lists,run_feedback_candidate_sensitivity.py
+added_sensitivity,candidate_refresh,global_seed+88000+10000*panel_index+100*response_seed+round_index+17*user_row+popularity_bin,independent popularity-stratified refresh stream,run_feedback_candidate_sensitivity.py
+bootstrap,lower_feedback,20269001+row_index,lower-feedback endpoints,run_feedback_candidate_sensitivity.py
+bootstrap,candidate_refresh,20269101+row_index,refreshed-pool endpoints,run_feedback_candidate_sensitivity.py
+bootstrap,refresh_minus_fixed,20269201+row_index,paired LMC differences,run_feedback_candidate_sensitivity.py

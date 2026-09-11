@@ -25,11 +25,25 @@ unit- and round-level outputs in a disposable copy.
 The command must end with `"status": "passed"`. Do not continue after a hash
 or dimension failure.
 
-## C. Complete rerun
+## C. Recreate the added sensitivity summaries
+
+The archived round-level outputs can be summarized without PixelRec:
 
 ```bash
-export JIIS_DATA_ROOT="$PWD/data/derived"
-export JIIS_FORCE_RETRAIN=1
+.venv/bin/python run_feedback_candidate_sensitivity.py summarize
+```
+
+After reconstructing the licensed inputs, the two additions can be rerun with:
+
+```bash
+.venv/bin/python run_feedback_candidate_sensitivity.py all
+```
+
+## D. Complete rerun
+
+```bash
+export JDSA_DATA_ROOT="$PWD/data/derived"
+export JDSA_FORCE_RETRAIN=1
 .venv/bin/python scripts/run_pipeline.py full
 ```
 
