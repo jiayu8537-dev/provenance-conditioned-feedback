@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run archive-level or complete JIIS reproduction workflows."""
+"""Run archive-level or complete JDSA reproduction workflows."""
 from __future__ import annotations
 
 import argparse
@@ -32,8 +32,9 @@ def aggregate(root: Path = ROOT) -> None:
     run("run_extension.py", "aggregate-long-horizon", root=root)
     run("run_robustness.py", "aggregate", root=root)
     run("run_choice_process_sensitivity.py", "aggregate", root=root)
-    if (root / "publication_assets" / "make_jiis_final_figures.py").is_file():
-        run("publication_assets/make_jiis_final_figures.py", root=root)
+    run("run_feedback_candidate_sensitivity.py", "summarize", root=root)
+    if (root / "publication_assets" / "make_jdsa_final_figures.py").is_file():
+        run("publication_assets/make_jdsa_final_figures.py", root=root)
 
 
 def audit() -> None:
@@ -47,7 +48,7 @@ def audit() -> None:
         str(path.relative_to(ROOT)): pd.read_csv(path)
         for path in sorted((ROOT / "tables").rglob("*.csv"))
     }
-    with tempfile.TemporaryDirectory(prefix="ipm_reproduction_audit_") as directory:
+    with tempfile.TemporaryDirectory(prefix="jdsa_reproduction_audit_") as directory:
         work = Path(directory) / "package"
         shutil.copytree(
             ROOT,
@@ -105,7 +106,7 @@ def audit() -> None:
 
 
 def full() -> None:
-    data_root = Path(os.environ.get("JIIS_DATA_ROOT", ROOT / "data" / "derived"))
+    data_root = Path(os.environ.get("JDSA_DATA_ROOT", ROOT / "data" / "derived"))
     required = [
         "main_10u5i_leave_last_two_split.csv.gz",
         "model_aware_provenance_assignment_v2.csv",
@@ -153,8 +154,9 @@ def full() -> None:
     run("run_robustness.py", "aggregate")
 
     run("run_choice_process_sensitivity.py", "all")
-    if (ROOT / "publication_assets" / "make_jiis_final_figures.py").is_file():
-        run("publication_assets/make_jiis_final_figures.py")
+    run("run_feedback_candidate_sensitivity.py", "all")
+    if (ROOT / "publication_assets" / "make_jdsa_final_figures.py").is_file():
+        run("publication_assets/make_jdsa_final_figures.py")
     run(
         "-m", "pytest", "-q", "-p", "no:cacheprovider",
         "--import-mode=importlib", "tests",

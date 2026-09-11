@@ -43,6 +43,7 @@ def required_files() -> None:
         "LICENSE.md", "CITATION.cff",
         "requirements.txt", "configs/main.yaml", "configs/bpr.yaml",
         "configs/extension.yaml", "configs/robustness.yaml",
+        "configs/feedback_candidate_sensitivity.yaml",
         "scripts/prepare_pixelrec_inputs.py", "scripts/run_pipeline.py",
         "data/protocol/model_aware_assignment_protocol.npz",
         "artifacts/bpr_full_history.npz", "artifacts/lightgcn_full_history_cpu.npz",
@@ -58,10 +59,15 @@ def required_files() -> None:
         "tables/extension/long_horizon_zero_drift.csv",
         "tables/robustness/robustness_endpoints.csv",
         "tables/choice_process/choice_process_sensitivity.csv",
+        "raw/added_sensitivity/lower_acceptance_round_level.csv.gz",
+        "raw/added_sensitivity/dynamic_candidates_round_level.csv.gz",
+        "tables/added_sensitivity/outside_utility_calibration.csv",
+        "tables/added_sensitivity/lower_acceptance_endpoints.csv",
+        "tables/added_sensitivity/dynamic_candidates_endpoints.csv",
+        "tables/added_sensitivity/dynamic_minus_fixed_paired_LMC.csv",
         "publication_assets/figures/main/Fig1.pdf",
         "publication_assets/figures/main/Fig2.pdf",
         "publication_assets/figures/main/Fig3.pdf",
-        "publication_assets/figures/main/Fig4.pdf",
         "publication_assets/figures/supplementary/SFig1_sensitivity.png",
         "publication_assets/figures/supplementary/SFig2_targeted_validation.png",
     ]
@@ -168,6 +174,24 @@ def result_anchor_checks() -> None:
           "zero-response equivalence through round 12")
     check(not any(equivalent[(24, r)] for r in ("event_online", "fixed_budget_history_replay")),
           "round-24 zero-response intervals exceed the equivalence margin")
+
+    calibration = pd.read_csv(ROOT / "tables/added_sensitivity/outside_utility_calibration.csv")
+    check(calibration.calibration_users.eq(500).all(), "500-user lower-feedback calibration panel")
+    expected_u0 = {0.1: 6.526023986424852, 0.2: 5.713364208471231, 0.4: 4.729528196444637}
+    for target, expected in expected_u0.items():
+        close(calibration.set_index("target_initial_acceptance").loc[target, "outside_utility"],
+              expected, f"outside-option calibration {target:.0%}")
+    dynamic = pd.read_csv(ROOT / "tables/added_sensitivity/dynamic_candidates_endpoints.csv")
+    dynamic = dynamic.set_index("scenario")
+    close(dynamic.loc["moderate_asymmetric", "estimate"], 0.01577273461140342,
+          "refreshed-pool moderate LMC")
+    close(dynamic.loc["strong_premium_penalty", "estimate"], 0.03277250854332194,
+          "refreshed-pool strong LMC")
+    close(dynamic.loc["ai_appreciation", "estimate"], -0.009671026963004415,
+          "refreshed-pool AI-appreciation LMC")
+    paired = pd.read_csv(ROOT / "tables/added_sensitivity/dynamic_minus_fixed_paired_LMC.csv")
+    check(((paired.ci_low <= 0) & (paired.ci_high >= 0)).all(),
+          "all refresh-minus-fixed LMC intervals include zero")
 
 
 def manifest_checks() -> None:
