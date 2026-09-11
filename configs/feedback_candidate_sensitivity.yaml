@@ -1,0 +1,24 @@
+panel_indices: [0, 1]
+assignment_count: 5
+response_seed_count: 5
+rounds: 6
+bootstrap_repetitions: 2000
+scenarios: [zero, moderate_asymmetric, strong_premium_penalty, ai_appreciation]
+updating: unmodified
+lower_feedback:
+  target_initial_acceptance: [0.10, 0.20, 0.40]
+  calibration_users: 500
+  calibration_seed_rule: global_seed+91000
+  calibration_candidate_seed_rule: global_seed+92000
+  candidate_mode: fixed
+  calibrated_outside_utilities: [6.526023986424852, 5.713364208471231, 4.729528196444637]
+candidate_refresh:
+  outside_utility: 0.5
+  initial_round: common_fixed_pool
+  refresh_from_round: 2
+  candidate_size: 240
+  model_retrieved_items: 150
+  popularity_stratified_warm_items: 90
+  branch_specific_exclusion: true
+  independent_recall_stream: true
+note: "Lower feedback and candidate refresh are varied separately, not jointly."
