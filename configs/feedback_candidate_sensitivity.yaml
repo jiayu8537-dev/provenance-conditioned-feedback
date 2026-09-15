@@ -1,4 +1,5 @@
-panel_indices: [0, 1]
+# Current manuscript lower-feedback comparison.
+panel_indices: [0, 1, 2, 3, 4]
 assignment_count: 5
 response_seed_count: 5
 rounds: 6
@@ -12,7 +13,18 @@ lower_feedback:
   calibration_candidate_seed_rule: global_seed+92000
   candidate_mode: fixed
   calibrated_outside_utilities: [6.526023986424852, 5.713364208471231, 4.729528196444637]
+  matched_high_feedback_reference: true
+  high_feedback_outside_utility: 0.5
+expanded_lower_feedback:
+  panel_indices: [0, 1, 2, 3, 4]
+  assignment_count: 5
+  response_seed_count: 5
+  target_initial_acceptance: [0.10, 0.20, 0.40]
+  matched_high_feedback_reference: true
+  high_feedback_outside_utility: 0.5
+  candidate_mode: fixed
 candidate_refresh:
+  panel_indices: [0, 1]
   outside_utility: 0.5
   initial_round: common_fixed_pool
   refresh_from_round: 2
