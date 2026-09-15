@@ -86,9 +86,11 @@ The delivered validation record is `logs/data_preparation_validation.json`.
 
 ## Scope and interpretation
 
-The 5 × 10 × 10 BPR grid is the primary design. Extensions use the locked
-2 × 5 × 5 reduced crossed design and are not pooled with the confirmatory
-estimates. The strict 15u/5i analysis is a within-dataset structural
+The 5 × 10 × 10 BPR grid is the primary design. The expanded lower-feedback
+comparison uses five panels, five assignments, and five response streams, with
+the original high-feedback condition rerun on the same cells. Other targeted
+extensions use the locked 2 × 5 × 5 reduced crossed design and are not pooled
+with the confirmatory estimates. The strict 15u/5i analysis is a within-dataset structural
 replication, not an external-dataset validation. The oracle correction uses
 the known simulated response parameters and is a mechanism benchmark, not a
 deployable estimator.
@@ -96,6 +98,16 @@ deployable estimator.
 The 10%, 20%, and 40% acceptance targets are design conditions, not empirical
 calibration claims. Candidate refresh and lower feedback are varied separately:
 the former retains `u0 = 0.5`, and the latter retains fixed candidate pools.
+The five-panel lower-feedback outputs and their matched high-feedback reference
+are stored in the `lower_acceptance_expanded_*` files. The paired file defines
+each record as \(\lvert\mathrm{LMC}_{\text{target},j}\rvert-
+\lvert\mathrm{LMC}_{\text{high},j}\rvert\) within matched cell \(j\), before
+crossed-bootstrap aggregation over panels, assignments, and response streams.
+It supplies Online Resource 1, Table S2, Panel C. All nine point estimates are
+negative; eight 95% intervals exclude zero, while the 40% AI-appreciation
+interval includes zero. `lower_acceptance_endpoints.csv` is retained as a
+compatibility view of the current five-panel target-condition estimates, not
+as a separate two-panel analysis.
 
 All paths are relative to the package root. No source-data row, personal path,
 credential, or machine-specific mount point is included.
