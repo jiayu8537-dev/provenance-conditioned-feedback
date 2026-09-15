@@ -81,13 +81,22 @@ def configure_style() -> None:
             "pdf.fonttype": 42,
             "ps.fonttype": 42,
             "svg.fonttype": "none",
+            "axes.unicode_minus": False,
         }
     )
 
 
-def panel_header(ax, label: str, title: str, *, y: float = 1.035) -> None:
+def panel_header(
+    ax,
+    label: str,
+    title: str,
+    *,
+    y: float = 1.035,
+    label_x: float = -0.10,
+    title_x: float = 0.06,
+) -> None:
     ax.text(
-        -0.10,
+        label_x,
         y,
         label,
         transform=ax.transAxes,
@@ -98,7 +107,7 @@ def panel_header(ax, label: str, title: str, *, y: float = 1.035) -> None:
         clip_on=False,
     )
     ax.text(
-        0.06,
+        title_x,
         y,
         title,
         transform=ax.transAxes,
@@ -427,7 +436,7 @@ def make_sfig1(candidate: pd.DataFrame, updates: pd.DataFrame, oracle: pd.DataFr
     sensitivity_panel(axes[1], updates, "online_steps", [1, 3, 10])
     sensitivity_panel(axes[2], oracle, "oracle_c", [0.5, 1.0, 1.5])
     panel_header(axes[0], "(a)", "Candidate pool, M")
-    panel_header(axes[1], "(b)", "Online updates, K")
+    panel_header(axes[1], "(b)", "SGD steps per event")
     panel_header(axes[2], "(c)", "Oracle multiplier, c")
     axes[0].set_ylabel("Learning-mediated exposure contrast, LMC")
     axes[1].set_xlabel("Sensitivity setting")
@@ -544,7 +553,7 @@ def plot_horizon(ax, trajectories: pd.DataFrame) -> None:
     selected = trajectories[
         (trajectories.horizon == 24) & (trajectories.update_regime == "event_online")
     ]
-    for scenario in ["zero", "moderate_asymmetric", "strong_premium_penalty", "ai_appreciation"]:
+    for scenario in ["moderate_asymmetric", "strong_premium_penalty", "ai_appreciation"]:
         series = selected[selected.scenario == scenario].sort_values("round")
         ax.plot(
             series["round"],
@@ -584,7 +593,14 @@ def make_sfig2(lightgcn: pd.DataFrame, trajectories: pd.DataFrame, differences: 
     plot_horizon(ax_c, trajectories)
     panel_header(ax_a, "(a)", "Dynamic LightGCN at round 6")
     panel_header(ax_b, "(b)", "Fixed-budget history replay")
-    panel_header(ax_c, "(c)", "BPR-Online through round 24", y=1.03)
+    panel_header(
+        ax_c,
+        "(c)",
+        "BPR-Online through round 24",
+        y=1.03,
+        label_x=0.00,
+        title_x=0.06,
+    )
     fig.subplots_adjust(left=0.10, right=0.985, bottom=0.09, top=0.95)
     save_figure(fig, "SFig2_targeted_validation_600dpi")
 
@@ -611,8 +627,8 @@ def copy_sources(paths: list[Path]) -> None:
 
 def write_readme() -> None:
     (OUT / "README.txt").write_text(
-        "JDSA figure-regeneration set. The exact submitted Figs. 1–3 are retained in "
-        "publication_assets/figures/main. Figs. 2–3, Fig. S1, and Fig. S2 can also be "
+        "JDSA figure-regeneration set. The exact submitted Figs. 1–4 are retained in "
+        "publication_assets/figures/main. Data-driven main and supplementary figures can also be "
         "regenerated from the included CSV files using a common Arial visual system. "
         "The common M=240, K=3 event-online cells in SFig. 1 use the single fixed-seed "
         "canonical intervals reported in robustness_endpoints.csv. "
