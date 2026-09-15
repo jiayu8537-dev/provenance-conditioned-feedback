@@ -60,14 +60,18 @@ def required_files() -> None:
         "tables/robustness/robustness_endpoints.csv",
         "tables/choice_process/choice_process_sensitivity.csv",
         "raw/added_sensitivity/lower_acceptance_round_level.csv.gz",
+        "raw/added_sensitivity/lower_acceptance_expanded_round_level.csv.gz",
         "raw/added_sensitivity/dynamic_candidates_round_level.csv.gz",
         "tables/added_sensitivity/outside_utility_calibration.csv",
         "tables/added_sensitivity/lower_acceptance_endpoints.csv",
+        "tables/added_sensitivity/lower_acceptance_expanded_endpoints.csv",
+        "tables/added_sensitivity/lower_acceptance_expanded_paired_vs_high.csv",
         "tables/added_sensitivity/dynamic_candidates_endpoints.csv",
         "tables/added_sensitivity/dynamic_minus_fixed_paired_LMC.csv",
         "publication_assets/figures/main/Fig1.pdf",
         "publication_assets/figures/main/Fig2.pdf",
         "publication_assets/figures/main/Fig3.pdf",
+        "publication_assets/figures/main/Fig4.pdf",
         "publication_assets/figures/supplementary/SFig1_sensitivity.png",
         "publication_assets/figures/supplementary/SFig2_targeted_validation.png",
     ]
@@ -152,14 +156,14 @@ def result_anchor_checks() -> None:
         "strong_premium_penalty": 0.02886565187408185,
     }
     for scenario, expected in anchors.items():
-        close(table4.loc[scenario, "estimate"], expected, f"Fig. 3 endpoint {scenario}")
+        close(table4.loc[scenario, "estimate"], expected, f"Fig. 2 endpoint {scenario}")
 
     table5 = pd.read_csv(ROOT / "tables/Table5_intervention_tradeoffs.csv")
     key = table5.set_index(["scenario", "intervention"])
     close(key.loc[("moderate_asymmetric", "quota_reranking"), "AA_estimate"],
-          0.0066856971335070995, "Table 4 quota estimate")
+          0.0066856971335070995, "Table 5 quota estimate")
     close(key.loc[("strong_premium_penalty", "combined"), "AA_estimate"],
-          -0.00014651001641893772, "Table 4 combined estimate")
+          -0.00014651001641893772, "Table 5 combined estimate")
 
     light = pd.read_csv(ROOT / "tables/extension/lightgcn_dynamic_amplification.csv")
     light = light.set_index(["scenario", "intervention"])
@@ -192,6 +196,40 @@ def result_anchor_checks() -> None:
     paired = pd.read_csv(ROOT / "tables/added_sensitivity/dynamic_minus_fixed_paired_LMC.csv")
     check(((paired.ci_low <= 0) & (paired.ci_high >= 0)).all(),
           "all refresh-minus-fixed LMC intervals include zero")
+
+    expanded_raw = pd.read_csv(ROOT / "raw/added_sensitivity/lower_acceptance_expanded_round_level.csv.gz")
+    check(expanded_raw.panel.nunique() == 5, "five lower-feedback panels")
+    check(expanded_raw.assignment.nunique() == 5, "five lower-feedback assignments")
+    check(expanded_raw.response_seed.nunique() == 5, "five lower-feedback response streams")
+    check(set(expanded_raw.feedback_condition) == {
+        "target_10", "target_20", "target_40", "high_feedback_reference"
+    }, "matched lower- and high-feedback conditions")
+    expanded = pd.read_csv(ROOT / "tables/added_sensitivity/lower_acceptance_expanded_endpoints.csv")
+    expanded = expanded.set_index(["feedback_condition", "scenario"])
+    close(expanded.loc[("target_10", "strong_premium_penalty"), "estimate"],
+          0.0022711228016771, "five-panel 10-percent strong-response LMC", tolerance=1e-10)
+    close(expanded.loc[("high_feedback_reference", "moderate_asymmetric"), "estimate"],
+          0.0155214628341856, "matched high-feedback moderate-response LMC", tolerance=1e-10)
+    expanded_paired = pd.read_csv(
+        ROOT / "tables/added_sensitivity/lower_acceptance_expanded_paired_vs_high.csv"
+    )
+    check(len(expanded_paired) == 9, "nine paired absolute-LMC lower-feedback comparisons")
+    check((expanded_paired.absolute_lmc_difference_estimate < 0).all(),
+          "all paired absolute-LMC point differences are negative")
+    aversion = expanded_paired.scenario.isin(["moderate_asymmetric", "strong_premium_penalty"])
+    check((expanded_paired.loc[aversion, "absolute_lmc_difference_ci_high"] < 0).all(),
+          "all aversion-condition absolute-LMC reductions exclude zero")
+    includes_zero = (
+        (expanded_paired.absolute_lmc_difference_ci_low <= 0)
+        & (expanded_paired.absolute_lmc_difference_ci_high >= 0)
+    )
+    exception = expanded_paired.loc[includes_zero]
+    check(
+        len(exception) == 1
+        and math.isclose(float(exception.iloc[0].target_initial_acceptance), 0.4)
+        and exception.iloc[0].scenario == "ai_appreciation",
+        "only the 40-percent AI-appreciation absolute-LMC interval includes zero",
+    )
 
 
 def manifest_checks() -> None:
