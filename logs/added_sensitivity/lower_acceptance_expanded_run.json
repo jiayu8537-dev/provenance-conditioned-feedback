@@ -1,0 +1,28 @@
+{
+  "status": "complete",
+  "rows": 24000,
+  "seconds": 24484.84294128418,
+  "panels": 5,
+  "panel_indices": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "assignments": 5,
+  "response_seeds": 5,
+  "scenarios": [
+    "zero",
+    "moderate_asymmetric",
+    "strong_premium_penalty",
+    "ai_appreciation"
+  ],
+  "targets": [
+    0.1,
+    0.2,
+    0.4
+  ],
+  "matched_high_feedback_reference": true,
+  "high_feedback_outside_utility": 0.5
+}
