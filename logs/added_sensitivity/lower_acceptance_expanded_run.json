@@ -24,5 +24,11 @@
     0.4
   ],
   "matched_high_feedback_reference": true,
-  "high_feedback_outside_utility": 0.5
+  "high_feedback_outside_utility": 0.5,
+  "bootstrap_repetitions": 2000,
+  "bootstrap_seeds": {
+    "endpoint_base": 20269301,
+    "paired_lmc_base": 20269401,
+    "paired_absolute_lmc_base": 20269402
+  }
 }
