@@ -22,6 +22,24 @@ def test_lower_feedback_calibration_and_outputs():
     }
     assert set(endpoints["target_initial_acceptance"]) == {0.1, 0.2, 0.4}
     assert endpoints["actual_acceptance_rate"].between(0, 1).all()
+    assert np.isclose(
+        endpoints.set_index(["target_initial_acceptance", "scenario"]).loc[
+            (0.1, "strong_premium_penalty"), "estimate"
+        ],
+        0.0022711228016771,
+        rtol=0,
+        atol=1e-12,
+    )
+
+    expanded = pd.read_csv(
+        ROOT / "tables/added_sensitivity/lower_acceptance_expanded_endpoints.csv"
+    )
+    assert expanded["feedback_condition"].nunique() == 4
+    paired = pd.read_csv(
+        ROOT / "tables/added_sensitivity/lower_acceptance_expanded_paired_vs_high.csv"
+    )
+    assert len(paired) == 9
+    assert (paired["absolute_lmc_difference_estimate"] < 0).all()
 
 
 def test_candidate_refresh_pairing_and_turnover():
