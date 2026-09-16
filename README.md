@@ -109,6 +109,21 @@ interval includes zero. `lower_acceptance_endpoints.csv` is retained as a
 compatibility view of the current five-panel target-condition estimates, not
 as a separate two-panel analysis.
 
+To recreate the current manuscript tables from the archived outputs, run:
+
+```bash
+.venv/bin/python run_feedback_candidate_sensitivity.py summarize
+```
+
+To rerun the source-dependent additions after reconstructing the licensed
+inputs, run `run_feedback_candidate_sensitivity.py all`. That command uses
+panels 0--4 for the lower-feedback and matched high-feedback comparison, then
+runs the separate two-panel candidate-refresh analysis. The 2,000-repetition
+bootstrap seeds are fixed at 20269301 for endpoints and at base seeds 20269401
+and 20269402 for the paired signed- and absolute-LMC comparisons. The legacy
+two-panel lower-feedback route is retained only under the explicit `low` and
+`summarize-legacy` commands.
+
 All paths are relative to the package root. No source-data row, personal path,
 credential, or machine-specific mount point is included.
 
