@@ -29,6 +29,11 @@ for directory in (RAW, TABLES, LOGS):
 
 SCENARIOS = ["zero", "moderate_asymmetric", "strong_premium_penalty", "ai_appreciation"]
 TARGETS = [0.10, 0.20, 0.40]
+EXPANDED_PANELS = tuple(range(5))
+EXPANDED_ENDPOINT_BOOTSTRAP_SEED = 20269301
+EXPANDED_PAIRED_LMC_BOOTSTRAP_SEED = 20269401
+EXPANDED_PAIRED_ABSOLUTE_LMC_BOOTSTRAP_SEED = 20269402
+BOOTSTRAP_REPETITIONS = 2000
 
 
 def load_runtime():
@@ -140,6 +145,88 @@ def run_low_acceptance():
         "status": "complete", "rows": len(raw), "seconds": time.time() - started,
         "panels": 2, "assignments": 5, "response_seeds": 5,
         "scenarios": SCENARIOS, "targets": TARGETS,
+    }, indent=2))
+    return raw
+
+
+def run_expanded_low_acceptance():
+    """Run the lower-feedback scenarios on five panels with a matched high-feedback reference."""
+    from src.simulation import SimulationConfig, simulate_paired
+
+    load_runtime()
+    main, _, _ = read_configs()
+    calibration = calibrate_outside_utilities()
+    conditions = [
+        {
+            "feedback_condition": f"target_{int(100 * float(record['target_initial_acceptance']))}",
+            "target_initial_acceptance": float(record["target_initial_acceptance"]),
+            "outside_utility": float(record["outside_utility"]),
+        }
+        for record in calibration.to_dict("records")
+    ]
+    conditions.append({
+        "feedback_condition": "high_feedback_reference",
+        "target_initial_acceptance": np.nan,
+        "outside_utility": float(main["outside_utility"]),
+    })
+
+    rows = []
+    started = time.time()
+    for panel_index in EXPANDED_PANELS:
+        _, _, data, U, V, panel, pools = context(240, panel_index)
+        seeds, labels_list = assignment_setup(data, 5)
+        for assignment_seed, labels in zip(seeds, labels_list):
+            for response_seed in range(5):
+                response, negative, orders = streams(main, len(panel), response_seed)
+                for condition in conditions:
+                    config = SimulationConfig(
+                        rounds=6,
+                        top_k=20,
+                        online_steps=3,
+                        online_learning_rate=float(main["online_learning_rate"]),
+                        online_regularization=float(main["online_regularization"]),
+                        outside_utility=float(condition["outside_utility"]),
+                        position_scale=float(main["position_scale"]),
+                        minimum_score_sd=float(main["minimum_score_sd"]),
+                    )
+                    for scenario in SCENARIOS:
+                        result = simulate_paired(
+                            U, V, panel, pools, labels,
+                            effects(main, scenario, response_seed, len(panel)),
+                            response, negative, orders, config,
+                        )
+                        result.insert(0, "panel", panel_index)
+                        result.insert(1, "assignment", assignment_seed)
+                        result.insert(2, "response_seed", response_seed)
+                        result.insert(3, "scenario", scenario)
+                        result.insert(4, "feedback_condition", condition["feedback_condition"])
+                        result.insert(5, "target_initial_acceptance", condition["target_initial_acceptance"])
+                        result.insert(6, "outside_utility", condition["outside_utility"])
+                        rows.append(result)
+    raw = pd.concat(rows, ignore_index=True)
+    raw.to_csv(
+        RAW / "lower_acceptance_expanded_round_level.csv.gz",
+        index=False,
+        compression="gzip",
+    )
+    (LOGS / "lower_acceptance_expanded_run.json").write_text(json.dumps({
+        "status": "complete",
+        "rows": len(raw),
+        "seconds": time.time() - started,
+        "panels": len(EXPANDED_PANELS),
+        "panel_indices": list(EXPANDED_PANELS),
+        "assignments": 5,
+        "response_seeds": 5,
+        "scenarios": SCENARIOS,
+        "targets": TARGETS,
+        "matched_high_feedback_reference": True,
+        "high_feedback_outside_utility": float(main["outside_utility"]),
+        "bootstrap_repetitions": BOOTSTRAP_REPETITIONS,
+        "bootstrap_seeds": {
+            "endpoint_base": EXPANDED_ENDPOINT_BOOTSTRAP_SEED,
+            "paired_lmc_base": EXPANDED_PAIRED_LMC_BOOTSTRAP_SEED,
+            "paired_absolute_lmc_base": EXPANDED_PAIRED_ABSOLUTE_LMC_BOOTSTRAP_SEED,
+        },
     }, indent=2))
     return raw
 
@@ -325,10 +412,19 @@ def _summarize_mode(raw, condition_columns, output_name, seed):
     return frame
 
 
-def summarize():
+def summarize_legacy_low_acceptance():
     low = pd.read_csv(RAW / "lower_acceptance_round_level.csv.gz")
+    low_summary = _summarize_mode(
+        low,
+        ["target_initial_acceptance", "outside_utility"],
+        "lower_acceptance_legacy_two_panel_endpoints.csv",
+        20269001,
+    )
+    print(low_summary.to_string(index=False))
+
+
+def summarize_dynamic():
     dynamic = pd.read_csv(RAW / "dynamic_candidates_round_level.csv.gz")
-    low_summary = _summarize_mode(low, ["target_initial_acceptance", "outside_utility"], "lower_acceptance_endpoints.csv", 20269001)
     dynamic_summary = _summarize_mode(dynamic, ["candidate_mode"], "dynamic_candidates_endpoints.csv", 20269101)
 
     # Fixed-pool paired comparison on the identical reduced grid.
@@ -356,20 +452,111 @@ def summarize():
         out = hierarchical_bootstrap_mean(wide, "dynamic_minus_fixed_LMC", 2000, 20269201 + len(rows))
         rows.append({"scenario": scenario, **out})
     pd.DataFrame(rows).to_csv(TABLES / "dynamic_minus_fixed_paired_LMC.csv", index=False)
-    print(low_summary.to_string(index=False))
     print(dynamic_summary.to_string(index=False))
+
+
+def summarize_expanded_low_acceptance():
+    raw = pd.read_csv(RAW / "lower_acceptance_expanded_round_level.csv.gz")
+    summary = _summarize_mode(
+        raw,
+        ["feedback_condition", "outside_utility"],
+        "lower_acceptance_expanded_endpoints.csv",
+        EXPANDED_ENDPOINT_BOOTSTRAP_SEED,
+    )
+    target_map = {
+        "target_10": 0.10,
+        "target_20": 0.20,
+        "target_40": 0.40,
+        "high_feedback_reference": np.nan,
+    }
+    summary.insert(
+        1,
+        "target_initial_acceptance",
+        summary["feedback_condition"].map(target_map),
+    )
+    summary.to_csv(TABLES / "lower_acceptance_expanded_endpoints.csv", index=False)
+
+    amplified_parts = []
+    for condition, group in raw.groupby("feedback_condition", sort=False):
+        x = add_amplification(group.assign(intervention="none"))
+        x["feedback_condition"] = condition
+        amplified_parts.append(x)
+    amplified = pd.concat(amplified_parts, ignore_index=True)
+    final = amplified[(amplified["round"] == 6) & (amplified["scenario"] != "zero")]
+    paired_rows = []
+    for scenario in SCENARIOS[1:]:
+        sub = final[final["scenario"] == scenario]
+        wide = sub.pivot(
+            index=["panel", "assignment", "response_seed", "scenario"],
+            columns="feedback_condition",
+            values="AA",
+        ).reset_index()
+        for target in TARGETS:
+            label = f"target_{int(100 * target)}"
+            raw_name = f"LMC_{label}_minus_high"
+            mag_name = f"abs_LMC_{label}_minus_high"
+            wide[raw_name] = wide[label] - wide["high_feedback_reference"]
+            wide[mag_name] = wide[label].abs() - wide["high_feedback_reference"].abs()
+            raw_out = hierarchical_bootstrap_mean(
+                wide, raw_name, BOOTSTRAP_REPETITIONS,
+                EXPANDED_PAIRED_LMC_BOOTSTRAP_SEED + len(paired_rows) * 2,
+            )
+            mag_out = hierarchical_bootstrap_mean(
+                wide, mag_name, BOOTSTRAP_REPETITIONS,
+                EXPANDED_PAIRED_ABSOLUTE_LMC_BOOTSTRAP_SEED + len(paired_rows) * 2,
+            )
+            paired_rows.append({
+                "target_initial_acceptance": target,
+                "scenario": scenario,
+                "lmc_difference_estimate": raw_out["estimate"],
+                "lmc_difference_ci_low": raw_out["ci_low"],
+                "lmc_difference_ci_high": raw_out["ci_high"],
+                "absolute_lmc_difference_estimate": mag_out["estimate"],
+                "absolute_lmc_difference_ci_low": mag_out["ci_low"],
+                "absolute_lmc_difference_ci_high": mag_out["ci_high"],
+            })
+    pd.DataFrame(paired_rows).to_csv(
+        TABLES / "lower_acceptance_expanded_paired_vs_high.csv", index=False
+    )
+    compatibility = summary[
+        summary["feedback_condition"].isin({"target_10", "target_20", "target_40"})
+    ].drop(columns=["feedback_condition"])
+    compatibility.to_csv(TABLES / "lower_acceptance_endpoints.csv", index=False)
+    print(summary.to_string(index=False))
+
+
+def summarize():
+    """Recreate the current five-panel lower-feedback and refresh summaries."""
+    summarize_expanded_low_acceptance()
+    summarize_dynamic()
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=["low", "dynamic", "summarize", "all"])
+    parser.add_argument(
+        "command",
+        choices=[
+            "low", "dynamic", "summarize", "all", "low-expanded",
+            "summarize-expanded", "summarize-legacy",
+        ],
+    )
     args = parser.parse_args()
-    if args.command in {"low", "all"}:
-        run_low_acceptance()
-    if args.command in {"dynamic", "all"}:
+    if args.command == "all":
+        run_expanded_low_acceptance()
         run_dynamic()
-    if args.command in {"summarize", "all"}:
         summarize()
+    elif args.command == "low":
+        run_low_acceptance()
+    elif args.command == "dynamic":
+        run_dynamic()
+    elif args.command == "summarize":
+        summarize()
+    elif args.command == "low-expanded":
+        run_expanded_low_acceptance()
+    elif args.command == "summarize-expanded":
+        summarize_expanded_low_acceptance()
+    elif args.command == "summarize-legacy":
+        summarize_legacy_low_acceptance()
 
 
 if __name__ == "__main__":
