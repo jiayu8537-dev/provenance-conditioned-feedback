@@ -33,11 +33,31 @@ The archived round-level outputs can be summarized without PixelRec:
 .venv/bin/python run_feedback_candidate_sensitivity.py summarize
 ```
 
+This command reads the archived five-panel lower-feedback output and the
+two-panel candidate-refresh output. It recreates the expanded endpoint table,
+the nine matched lower-minus-high feedback comparisons, the compatibility
+endpoint view, and the candidate-refresh summaries. The endpoint bootstrap
+uses seed 20269301; paired signed- and absolute-LMC comparisons use seed bases
+20269401 and 20269402, respectively, with 2,000 repetitions.
+
+To reproduce the five-panel lower-feedback comparison and its matched
+high-feedback reference:
+
+```bash
+.venv/bin/python run_feedback_candidate_sensitivity.py low-expanded
+.venv/bin/python run_feedback_candidate_sensitivity.py summarize
+```
+
 After reconstructing the licensed inputs, the two additions can be rerun with:
 
 ```bash
 .venv/bin/python run_feedback_candidate_sensitivity.py all
 ```
+
+`all` runs the five-panel lower-feedback analysis, its matched high-feedback
+reference, the two-panel candidate-refresh analysis, and the current summary
+pipeline. The earlier two-panel lower-feedback run remains available only as
+the explicitly named legacy commands `low` and `summarize-legacy`.
 
 ## D. Complete rerun
 
