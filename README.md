@@ -3,13 +3,21 @@
 This package accompanies the manuscript **“Provenance-Conditioned Feedback and
 Learning-Mediated Exposure Change in Online Recommender Systems: A
 Matched-Trajectory Simulation Study”** by
-Yu Jia and Shaojie Zhang. It is the complete reproducibility package for the
+Yu Jia, Shaojie Zhang, and Yongjie Shao. It is the complete reproducibility package for the
 International Journal of Data Science and Analytics submission, not the earlier
 BPR-only analysis folder. The confirmatory BPR module is joined by the upstream
 data-construction workflow and the LightGCN, long-horizon, replay,
 update-schedule, strict-core, choice-process, and intervention analyses reported
 in the manuscript and Supplementary Information. It also contains the added
 lower-feedback and roundwise candidate-refresh analyses.
+
+## Versioned archive
+
+The default branch is the development source. For peer review, reproduction,
+and citation, use the complete ZIP attached to the `v1.0.0` GitHub Release. The
+release archive is an immutable snapshot whose exact file set and SHA-256 hashes
+are recorded in `MANIFEST_SHA256.txt`. Run the audit from the extracted release
+root; no licensed PixelRec source data are required for the audit route.
 
 The package supports three levels of verification:
 

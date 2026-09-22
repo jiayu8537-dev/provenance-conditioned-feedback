@@ -1,0 +1,18 @@
+{
+  "release": "v1.0.0",
+  "audit_date": "2026-09-22",
+  "status": "passed",
+  "python": "3.12",
+  "pytest": {
+    "status": "passed",
+    "tests_passed": 25
+  },
+  "recomputation": {
+    "tables_recomputed": 30,
+    "point_columns_checked": 149,
+    "max_interval_endpoint_difference": 0.0016054310417979029,
+    "allowed_interval_endpoint_difference": 0.002
+  },
+  "licensed_pixelrec_inputs_required_for_audit": false,
+  "temporary_audit_copy_removed": true
+}

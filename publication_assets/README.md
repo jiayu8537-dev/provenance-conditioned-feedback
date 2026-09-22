@@ -1,8 +1,9 @@
 # Publication assets
 
-`figures/main/` contains the exact three PDF files used in the submitted main
+`figures/main/` contains the exact four PDF files used in the submitted main
 manuscript: the matched-trajectory protocol, the six-round LMC trajectories,
-and the benchmark comparison. `figures/supplementary/` contains the two figures
+the feedback-density and candidate-refresh sensitivity analysis, and the
+benchmark comparison. `figures/supplementary/` contains the two figures
 reported in the Supplementary Information. Their hashes are covered by the
 package manifest.
 

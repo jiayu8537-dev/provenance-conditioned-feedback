@@ -1,0 +1,4 @@
+JDSA figure-regeneration set. The exact submitted Figs. 1–4 are retained in publication_assets/figures/main. Data-driven main and supplementary figures can also be regenerated from the included CSV files using a common Arial visual system. The common M=240, K=3 event-online cells in SFig. 1 use the single fixed-seed canonical intervals reported in robustness_endpoints.csv. Raster files are 600 dpi; PDF and SVG files are vector exports.
+
+Supplementary Fig. S2 caption:
+SFig. 2. Targeted validation across architecture, horizon, and update regime. (a) Final-round LightGCN LMC under unmodified updating and the combined benchmark. (b) Paired change in LMC when one of three per-event updates was allocated to historical replay. (c) BPR-Online trajectories through 24 rounds under event-level updating. Points and lines denote estimates; error bars and bands denote 95% crossed-bootstrap confidence intervals from the reduced validation grid.

@@ -7,5 +7,9 @@ authors:
     given-names: Yu
   - family-names: Zhang
     given-names: Shaojie
+  - family-names: Shao
+    given-names: Yongjie
 version: 1.0.0
-date-released: 2026-09-10
+date-released: 2026-09-22
+repository-code: "https://github.com/jiayu8537-dev/provenance-conditioned-feedback"
+url: "https://github.com/jiayu8537-dev/provenance-conditioned-feedback/releases/tag/v1.0.0"

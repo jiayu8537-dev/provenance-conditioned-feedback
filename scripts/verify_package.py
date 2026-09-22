@@ -15,6 +15,19 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 FAILURES: list[str] = []
 CHECKS: list[str] = []
+EXCLUDED_PARTS = {
+    ".git", ".venv", "venv", "env", "__pycache__", ".pytest_cache",
+    ".mypy_cache", ".ruff_cache", ".tox", ".nox",
+}
+
+
+def is_runtime_artifact(path: Path) -> bool:
+    relative = path.relative_to(ROOT)
+    return any(part in EXCLUDED_PARTS for part in relative.parts) or path.suffix == ".pyc"
+
+
+def package_paths():
+    return (path for path in ROOT.rglob("*") if not is_runtime_artifact(path))
 
 
 def check(condition: bool, label: str) -> None:
@@ -72,6 +85,7 @@ def required_files() -> None:
         "publication_assets/figures/main/Fig2.pdf",
         "publication_assets/figures/main/Fig3.pdf",
         "publication_assets/figures/main/Fig4.pdf",
+        "publication_assets/figures/main/Fig4.png",
         "publication_assets/figures/supplementary/SFig1_sensitivity.png",
         "publication_assets/figures/supplementary/SFig2_targeted_validation.png",
     ]
@@ -81,7 +95,7 @@ def required_files() -> None:
 
 def disclosure_audit() -> None:
     prohibited_names = {".DS_Store", "__pycache__", ".pytest_cache"}
-    for path in ROOT.rglob("*"):
+    for path in package_paths():
         check(path.name not in prohibited_names, f"no hidden/cache item: {path.relative_to(ROOT)}")
         if path.is_file():
             check(path.suffix != ".pyc", f"no bytecode: {path.relative_to(ROOT)}")
@@ -95,7 +109,7 @@ def disclosure_audit() -> None:
         "\u7b2c\u4e8c" + "SCI",
         "\u672a\u547d\u540d\u6587\u4ef6\u5939",
     )
-    for path in ROOT.rglob("*"):
+    for path in package_paths():
         if path.is_file() and path.suffix.lower() in text_suffixes:
             try:
                 content = path.read_text(encoding="utf-8")
@@ -245,7 +259,7 @@ def manifest_checks() -> None:
     actual_files = {
         str(path.relative_to(ROOT))
         for path in ROOT.rglob("*")
-        if path.is_file() and path != manifest
+        if path.is_file() and path != manifest and not is_runtime_artifact(path)
     }
     check(actual_files == set(expected), "manifest file set")
     for relative, digest in expected.items():
