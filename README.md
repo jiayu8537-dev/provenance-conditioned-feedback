@@ -1,10 +1,13 @@
-# JDSA Reproducibility Package
+# Reproducibility Package
 
 This package accompanies the manuscript **“Provenance-Conditioned Feedback and
 Learning-Mediated Exposure Change in Online Recommender Systems: A
 Matched-Trajectory Simulation Study”** by
-Yu Jia, Shaojie Zhang, and Yongjie Shao. It is the complete reproducibility package for the
-International Journal of Data Science and Analytics submission, not the earlier
+Shaojie Zhang, Yu Jia, and Yongjie Shao. Shaojie Zhang and Yu Jia contributed
+equally to this work and share first authorship. Corresponding author: Yu Jia
+(e-mail: jiayu8537@gmail.com). This package accompanies the manuscript submitted
+to the IAENG International Journal of Computer Science. It is the complete
+reproducibility package, not the earlier
 BPR-only analysis folder. The confirmatory BPR module is joined by the upstream
 data-construction workflow and the LightGCN, long-horizon, replay,
 update-schedule, strict-core, choice-process, and intervention analyses reported
@@ -14,10 +17,12 @@ lower-feedback and roundwise candidate-refresh analyses.
 ## Versioned archive
 
 The default branch is the development source. For peer review, reproduction,
-and citation, use the complete ZIP attached to the `v1.0.0` GitHub Release. The
-release archive is an immutable snapshot whose exact file set and SHA-256 hashes
-are recorded in `MANIFEST_SHA256.txt`. Run the audit from the extracted release
-root; no licensed PixelRec source data are required for the audit route.
+and citation, use the permanent Zenodo archive for version 1.0.0
+(https://doi.org/10.5281/zenodo.22900790). The identical complete ZIP is also
+attached to the `v1.0.0` GitHub Release. The release archive is an immutable
+snapshot whose exact file set and SHA-256 hashes are recorded in
+`MANIFEST_SHA256.txt`. Run the audit from the extracted release root; no
+licensed PixelRec source data are required for the audit route.
 
 The package supports three levels of verification:
 
