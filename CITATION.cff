@@ -3,13 +3,19 @@ message: "If you use this reproducibility package, please cite the accompanying 
 title: "Reproducibility package for Provenance-Conditioned Feedback and Learning-Mediated Exposure Change in Online Recommender Systems: A Matched-Trajectory Simulation Study"
 type: software
 authors:
-  - family-names: Jia
-    given-names: Yu
   - family-names: Zhang
     given-names: Shaojie
+  - family-names: Jia
+    given-names: Yu
   - family-names: Shao
     given-names: Yongjie
 version: 1.0.0
 date-released: 2026-09-22
 repository-code: "https://github.com/jiayu8537-dev/provenance-conditioned-feedback"
-url: "https://github.com/jiayu8537-dev/provenance-conditioned-feedback/releases/tag/v1.0.0"
+doi: "10.5281/zenodo.22900790"
+url: "https://doi.org/10.5281/zenodo.22900790"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.22900790"
+  - type: url
+    value: "https://github.com/jiayu8537-dev/provenance-conditioned-feedback/releases/tag/v1.0.0"
